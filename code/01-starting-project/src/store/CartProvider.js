@@ -61,25 +61,20 @@ const cartReducer = (state, action) => {
 	}
 	return defaultCartState;
 };
-
-// create component that wraps children with context
 const CartProvider = (props) => {
 	const [cartState, dispatchCartAction] = useReducer(
 		cartReducer,
 		defaultCartState
 	);
 
-	// call dispatch to add item
 	const addItemToCartHandler = (item) => {
 		dispatchCartAction({ type: 'ADD', item: item });
 	};
 
-	// call dispatch to remove item
 	const removeItemFromCartHandler = (id) => {
 		dispatchCartAction({ type: 'REMOVE', id: id });
 	};
 
-	// update context value using useReducer to manage items and total amount
 	const cartContext = {
 		items: cartState.items,
 		totalAmount: cartState.totalAmount,
