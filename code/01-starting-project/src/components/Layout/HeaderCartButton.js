@@ -8,14 +8,18 @@ const HeaderCartButton = (props) => {
 	const cartCtx = useContext(CartContext);
 	const { items } = cartCtx;
 
+	//reduce() method executes a user-supplied "reducer" callback function on each element of the array, in order, passing in the return value from the calculation on the preceding element. The final result of running the reducer across all elements of the array is a single value.
+	// add the number of cart items in items from context
 	const numberOfCartItems = items.reduce((curNumber, item) => {
 		return curNumber + item.amount;
 	}, 0);
 
+	// btnClasses adds classes.bump if btn is highlighted
 	const btnClasses = `${classes.button} ${
 		btnIsHighlighted ? classes.bump : ''
 	}`;
 
+	// add useEffect with items from context as dependency
 	useEffect(() => {
 		if (cartCtx.items.length === 0) {
 			return;
@@ -27,7 +31,7 @@ const HeaderCartButton = (props) => {
 
 		return () => {
 			clearTimeout(timer);
-		}
+		};
 	}, [items]);
 
 	return (
